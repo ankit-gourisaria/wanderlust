@@ -26,9 +26,7 @@ const User = require("./models/user.js");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
-
-
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";  
+  
 // const dbUrl = process.env.ATLASDB_URL;
 
 main() 
@@ -40,7 +38,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(process.env.MONGO_URL);
 }
 
 app.set("view engine", "ejs");
@@ -152,8 +150,8 @@ app.use((err,req,res,next)=>{
   // res.status(statusCode).send(message);
 })
 
-
-app.listen(8080, () => {
+// console.log("PORT == " ,process.env.PORT)
+app.listen(process.env.PORT || 8080, () => {
   console.log("server is listening to port 8080");
 });
 
